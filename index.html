@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#121416" />
+    <meta name="description" content="Kuringe Nexus MD Dashboard" />
+    <link rel="icon" type="image/png" href="LOGO.png" />
+    <title>Kuringe Nexus | MD Dashboard</title>
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <section class="login-shell" id="loginView" aria-labelledby="login-title">
+        <div class="login-panel">
+          <div class="brand-mark"><img src="LOGO.png" alt="Kuringe logo" /></div>
+          <p class="eyebrow">KURINGE GROUP</p>
+          <h1 id="login-title">Nexus <em>MD</em></h1>
+          <p class="login-copy">One private place to see the pulse of every Kuringe business.</p>
+          <form id="loginForm" novalidate>
+            <label for="password">Access password</label>
+            <div class="password-wrap">
+              <input id="password" type="password" inputmode="numeric" autocomplete="current-password" placeholder="Enter password" aria-describedby="loginError" required />
+              <button class="peek" type="button" id="togglePassword" aria-label="Show password">Show</button>
+            </div>
+            <p class="error" id="loginError" role="alert"></p>
+            <button class="primary-button" type="submit">Enter dashboard <span>→</span></button>
+          </form>
+          <p class="secure-note"><span>●</span> Restricted leadership access</p>
+        </div>
+        <aside class="login-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="art-copy"><p>LEADERSHIP VIEW</p><strong>Eight businesses.<br />One clear picture.</strong></div>
+        </aside>
+      </section>
+
+      <section class="dashboard hidden" id="dashboardView" aria-labelledby="dashboard-title">
+        <header class="topbar">
+          <a class="top-brand" href="#" aria-label="Kuringe Nexus dashboard home"><img src="LOGO.png" alt="" /><span>KURINGE <b>NEXUS</b></span></a>
+          <div class="top-actions"><span class="status"><i></i> All systems available</span><button id="logoutButton" class="logout">Sign out</button></div>
+        </header>
+        <div class="dashboard-content">
+          <div class="intro"><div><p class="eyebrow">EXECUTIVE CONTROL CENTER</p><h1 id="dashboard-title">Good morning, <em>MD.</em></h1><p>Choose a business to open its live management dashboard.</p></div><div class="business-count"><strong>08</strong><span>Active<br />businesses</span></div></div>
+          <div class="divider"></div>
+          <div class="grid" id="companyGrid"></div>
+        </div>
+        <footer>© <span id="year"></span> Kuringe Group · Nexus MD Dashboard</footer>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
