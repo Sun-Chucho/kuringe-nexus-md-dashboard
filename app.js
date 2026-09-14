@@ -11,10 +11,10 @@ const companies = [
 const grid = document.querySelector('#companyGrid');
 grid.innerHTML = companies.map(([name, category, url, color, glow]) => {
   const domain = new URL(url).hostname;
-  return `<a class="card" href="${url}" target="_blank" rel="noopener noreferrer" style="--card:${color};--glow:${glow}">
+  return `<a class="card" href="${url}" style="--card:${color};--glow:${glow}" aria-label="Open ${name} management system">
     <div class="card-header"><img class="company-logo" src="https://www.google.com/s2/favicons?domain=${domain}&sz=128" alt="${name} logo" onerror="this.style.display='none'"><span class="open-icon">↗</span></div>
     <div><p class="category">${category}</p><h2 class="company-name">${name}</h2></div>
-    <div class="card-footer"><span><i class="live-dot"></i>Live dashboard</span><span>Open</span></div></a>`;
+    <div class="card-footer"><span>Management system</span><span>Enter</span></div></a>`;
 }).join('');
 const login = document.querySelector('#loginView'), dashboard = document.querySelector('#dashboardView'), password = document.querySelector('#password'), error = document.querySelector('#loginError');
 function showDashboard(){login.classList.add('hidden');dashboard.classList.remove('hidden');password.value='';}
