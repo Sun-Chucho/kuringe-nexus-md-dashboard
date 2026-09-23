@@ -16,10 +16,133 @@ grid.innerHTML = companies.map(([name, category, url, color, glow]) => {
     <div><p class="category">${category}</p><h2 class="company-name">${name}</h2></div>
     <div class="card-footer"><span>Management system</span><span>Enter</span></div></a>`;
 }).join('');
-const login = document.querySelector('#loginView'), dashboard = document.querySelector('#dashboardView'), password = document.querySelector('#password'), error = document.querySelector('#loginError');
-function showDashboard(){login.classList.add('hidden');dashboard.classList.remove('hidden');password.value='';}
-document.querySelector('#loginForm').addEventListener('submit', e => {e.preventDefault(); if(password.value === '1234'){sessionStorage.setItem('kuringe-md-auth','yes'); error.textContent=''; showDashboard();}else{error.textContent='Incorrect password. Please try again.';password.focus();}});
-document.querySelector('#togglePassword').addEventListener('click', e => {const hidden=password.type==='password';password.type=hidden?'text':'password';e.currentTarget.textContent=hidden?'Hide':'Show';});
-document.querySelector('#logoutButton').addEventListener('click',()=>{sessionStorage.removeItem('kuringe-md-auth');dashboard.classList.add('hidden');login.classList.remove('hidden');password.focus();});
-if(sessionStorage.getItem('kuringe-md-auth')==='yes')showDashboard();
-document.querySelector('#year').textContent=new Date().getFullYear();
+
+const login = document.querySelector('#loginView');
+const dashboard = document.querySelector('#dashboardView');
+const password = document.querySelector('#password');
+const error = document.querySelector('#loginError');
+
+function showDashboard() {
+  login.classList.add('hidden');
+  dashboard.classList.remove('hidden');
+  password.value = '';
+}
+
+document.querySelector('#loginForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (password.value === '1234') {
+    sessionStorage.setItem('kuringe-md-auth', 'yes');
+    error.textContent = '';
+    showDashboard();
+  } else {
+    error.textContent = 'Incorrect password. Please try again.';
+    password.focus();
+  }
+});
+
+document.querySelector('#togglePassword').addEventListener('click', (e) => {
+  const hidden = password.type === 'password';
+  password.type = hidden ? 'text' : 'password';
+  e.currentTarget.textContent = hidden ? 'Hide' : 'Show';
+});
+
+document.querySelector('#logoutButton').addEventListener('click', () => {
+  sessionStorage.removeItem('kuringe-md-auth');
+  dashboard.classList.add('hidden');
+  login.classList.remove('hidden');
+  password.focus();
+});
+
+if (sessionStorage.getItem('kuringe-md-auth') === 'yes') {
+  showDashboard();
+}
+
+document.querySelector('#year').textContent = new Date().getFullYear();
+
+// ==========================================
+// Service Worker Registration for PWA / Chrome
+// ==========================================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => console.log('Nexus Service Worker registered:', reg.scope))
+      .catch((err) => console.warn('Service Worker registration failed:', err));
+  });
+}
+
+// ==========================================
+// Chrome Desktop Application Installation (PWA)
+// ==========================================
+let deferredPrompt = null;
+const installButtons = document.querySelectorAll('.download-app-btn');
+const installModal = document.querySelector('#installModal');
+const closeModalBtn = document.querySelector('#closeModalBtn');
+const modalActionBtn = document.querySelector('#modalActionBtn');
+
+function isRunningStandalone() {
+  return window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true ||
+    document.referrer.includes('android-app://');
+}
+
+// If already running inside installed standalone desktop app window, hide install buttons
+if (isRunningStandalone()) {
+  installButtons.forEach((btn) => (btn.style.display = 'none'));
+}
+
+// Capture Chrome's beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installButtons.forEach((btn) => (btn.style.display = 'inline-flex'));
+});
+
+// Once installed to desktop
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  installButtons.forEach((btn) => (btn.style.display = 'none'));
+  if (installModal) installModal.classList.add('hidden');
+});
+
+async function handleInstallClick() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      deferredPrompt = null;
+      installButtons.forEach((btn) => (btn.style.display = 'none'));
+      if (installModal) installModal.classList.add('hidden');
+    }
+  } else {
+    // If beforeinstallprompt hasn't fired yet or Chrome desktop needs manual address bar trigger, show modal guide
+    if (installModal) installModal.classList.remove('hidden');
+  }
+}
+
+installButtons.forEach((btn) => {
+  btn.addEventListener('click', handleInstallClick);
+});
+
+if (modalActionBtn) {
+  modalActionBtn.addEventListener('click', () => {
+    if (deferredPrompt) {
+      handleInstallClick();
+    } else {
+      if (installModal) installModal.classList.add('hidden');
+    }
+  });
+}
+
+if (closeModalBtn) {
+  closeModalBtn.addEventListener('click', () => {
+    if (installModal) installModal.classList.add('hidden');
+  });
+}
+
+if (installModal) {
+  installModal.addEventListener('click', (e) => {
+    if (e.target === installModal) {
+      installModal.classList.add('hidden');
+    }
+  });
+}
