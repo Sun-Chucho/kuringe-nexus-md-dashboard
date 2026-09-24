@@ -34,3 +34,15 @@
   .download-app-btn{padding:9px 10px}
   .modal-card{padding:26px 20px}
 }
+
+/* Logo-led company cards */
+.card{color:var(--ink);border:1px solid var(--line);padding:18px 20px 20px;background:#fff;transition:transform .23s,box-shadow .23s,border-color .23s}
+.card:before{display:none}
+.card:hover{border-color:#c9c9c3;box-shadow:0 16px 28px #0002}
+.card-header{gap:14px}
+.logo-stage{height:86px;flex:1;display:flex;align-items:center;justify-content:flex-start;overflow:hidden}
+.company-logo{display:block;max-width:150px;width:auto;height:auto;max-height:78px;padding:0;background:transparent;border-radius:0;object-fit:contain;object-position:left center}
+.open-icon{width:27px;height:27px;flex:0 0 auto;border-color:var(--line);color:var(--ink);transition:.2s}
+.card:hover .open-icon{border-color:var(--red);background:var(--red);color:#fff}
+.category,.card-footer{color:var(--muted)}
+.card-footer{border-top:1px solid #ecece8;padding-top:12px}

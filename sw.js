@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kuringe-nexus-v1';
+const CACHE_NAME = 'kuringe-nexus-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -13,7 +13,15 @@ const ASSETS_TO_CACHE = [
   './apple-touch-icon.png',
   './favicon.ico',
   './favicon-32x32.png',
-  './favicon-16x16.png'
+  './favicon-16x16.png',
+  './assets/logos/redstone.png',
+  './assets/logos/real-estate.png',
+  './assets/logos/mawio.png',
+  './assets/logos/lighthouse.jpg',
+  './assets/logos/halls-moshi.ico',
+  './assets/logos/orange-hotel.jpeg',
+  './assets/logos/halls-mbezi.ico',
+  './assets/logos/casa.png'
 ];
 
 self.addEventListener('install', (event) => {
