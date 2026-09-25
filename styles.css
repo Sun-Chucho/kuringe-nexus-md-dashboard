@@ -53,10 +53,12 @@
 .map-kicker,.map-legend{width:min(610px,92%);display:flex;align-items:center;color:#a4a7ab;font:500 9px 'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase}
 .map-kicker{gap:9px}.map-kicker span{width:24px;height:1px;background:var(--red);box-shadow:0 0 8px #e21a22}
 .east-africa-map{width:min(610px,100%);height:calc(100% - 52px);min-height:450px;overflow:visible}
+.ocean{fill:url(#oceanFill);stroke:#2f596a55;stroke-width:1}
 .map-grid path{fill:none;stroke:#fff;stroke-width:1;opacity:.035}
-.neighbor path{fill:#ffffff04;stroke:#ffffff38;stroke-width:1.4;stroke-dasharray:5 6}
-.neighbor text,.country-label{fill:#8f9296;font:500 12px 'DM Mono',monospace;letter-spacing:.22em;text-anchor:middle}.neighbor text{font-size:10px;opacity:.68}
-.lake{fill:#08090a;stroke:#638a9b55;stroke-width:1}
+.neighbor{cursor:pointer;outline:none}.neighbor>path{fill:#17252b;stroke:#8aa3ad88;stroke-width:1.4;stroke-dasharray:5 6;transition:.22s}.neighbor:hover>path,.neighbor:focus>path{fill:#243840;stroke:#e21a22;stroke-dasharray:none;filter:drop-shadow(0 0 10px #e21a2255)}
+.neighbor-name,.country-label{fill:#8f9296;font:500 12px 'DM Mono',monospace;letter-spacing:.22em;text-anchor:middle}.neighbor-name{font-size:10px;opacity:.75;transition:.22s}.neighbor:hover .neighbor-name,.neighbor:focus .neighbor-name{fill:#fff;opacity:1}
+.inland-water{fill:#163b4a;stroke:#6e9bad;stroke-width:1.2}.water-label{fill:#75a0b044;font:500 8px 'DM Mono',monospace;letter-spacing:.24em;text-anchor:middle}
+.recommendation-card{opacity:0;pointer-events:none;transition:opacity .2s;filter:drop-shadow(0 10px 14px #0009)}.neighbor:hover .recommendation-card,.neighbor:focus .recommendation-card{opacity:1}.recommendation-card rect{fill:#101417;stroke:#e21a22;stroke-width:1}.recommendation-card text{fill:#d9dddf;font:500 8px 'DM Mono',monospace;letter-spacing:.04em;text-anchor:start}.recommendation-card .rec-title{fill:#ff4b52;font-size:7px;letter-spacing:.12em}
 .tanzania-shadow{fill:#000;opacity:.55;transform:translate(10px,13px);filter:blur(8px)}
 .tanzania{fill:url(#tzFill);stroke:#ffffffa3;stroke-width:2}
 .country-label{fill:#ffffff1f;font-size:19px;letter-spacing:.3em}
